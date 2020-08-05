@@ -1,49 +1,42 @@
-// document.getElementsByClassName
+// Define UI Vars
+const form = document.querySelector("#task-form");
+const taskList = document.querySelector(".collection");
+const clearBtn = document.querySelector(".clear-tasks");
+const filter = document.querySelector("#filter");
+const taskInput = document.querySelector("#task");
 
-// const items = document.getElementsByClassName('collection-item');
-// console.log(items);
-// console.log(items[0]);
-// items[0].style.color = 'red';
-// items[3].textContent = 'Hello';
+// Load all event listeners
+loadEventListeners();
 
-// const listItems = document.querySelector('ul').getElementsByClassName('collection-item');
-
-// console.log(listItems);
-
-// // document.getElementsByTagName
-let lis = document.getElementsByTagName("li");
-// console.log(lis);
-// console.log(lis[0]);
-// lis[0].style.color = 'red';
-// lis[3].textContent = 'Hello';
-
-// // Conver HTML Collection into array
-lis = Array.from(lis);
-
-lis.reverse();
-
-lis.forEach((li, index) => {
-  lis.textContent = `${index}: Hello`;
-});
-
-console.log(lis);
-
-// document.querySelectorAll
-const items = document.querySelectorAll("ul.collection li.collection-item");
-
-items.forEach(function (item, index) {
-  item.textContent = `${index}: Hello`;
-});
-
-const liOdd = document.querySelectorAll("li:nth-child(odd)");
-const liEven = document.querySelectorAll("li:nth-child(even)");
-
-liOdd.forEach(function (li, index) {
-  li.style.background = "#ccc";
-});
-
-for (let i = 0; i < liEven.length; i++) {
-  liEven[i].style.background = "#f4f4f4";
+function loadEventListeners() {
+  form.addEventListener("submit", addTask);
 }
 
-console.log(items);
+// Add task
+function addTask(e) {
+  if (taskInput.value === "") {
+    alert("add a task");
+  }
+  // Creat LI element
+  const li = document.createElement("li");
+  // Add class
+  li.className = "collection-item";
+  // Create text node append to li
+  li.appendChild(document.createTextNode(taskInput.value));
+  // crate new link element
+  const link = document.createElement("a");
+  // add class
+  link.className = "delete-item secondary-content";
+  // Add icom html
+  link.innerHTML = '<i class="fa fa-remove"></i>';
+  // Append the link to li
+  li.appendChild(link);
+
+  // Append li to ul
+  taskList.appendChild(li);
+
+  // Clear the ipuut
+  taskInput.value = "";
+
+  e.preventDefault();
+}
