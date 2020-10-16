@@ -71,15 +71,12 @@ function addTask(e) {
   link.innerHTML = '<i class="fa fa-remove"></i>';
   // Append the link to li
   li.appendChild(link);
-
   // Append li to ul
   taskList.appendChild(li);
-
   // Store task in local storage
   storeTaskInLocalStorage(taskInput.value);
   // Clear the iput
   taskInput.value = "";
-
   e.preventDefault();
 }
 
